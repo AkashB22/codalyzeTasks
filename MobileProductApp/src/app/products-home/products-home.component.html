@@ -1,0 +1,22 @@
+<h1>Products details: </h1>
+<table *ngIf="show" class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">name</th>
+        <th scope="col">weight</th>
+        <th scope="col">availability</th>
+        <th scope="col">isEditable</th>
+      </tr>
+    </thead>
+    <tbody>
+				<tr *ngFor="let product of products; let i=index">
+						<td>{{i+1}}</td>
+						<td>{{product.name}}</td>
+						<td>{{product.weight}}</td>
+						<td>{{product.availability}}</td>
+						<td *ngIf="product.isEditable"><button class="btn btn-primary"><span routerLink ="/edit-product/{{product.prodName}}">Edit</span></button></td>
+						<td *ngIf="!product.isEditable">Not Edit</td>
+					</tr>
+    </tbody>
+	</table>

@@ -1,0 +1,65 @@
+<h1>Product details:</h1>
+<div class='row' *ngIf="product">
+    <form name="updateProduct" (submit)="onSubmit()" #productForm='ngForm'>
+        <div class='form-group'>
+            <label> Name :</label>
+            <input class='form-control' name="name" type='text' [(ngModel)]="product.name" required>
+        </div>
+        <div class='form-group'>
+            <label> Weight :</label>
+            <input class='form-control' name="weight" type='text' [(ngModel)]="product.weight" required>
+        </div>
+        <div class='form-group'>
+            <label> Availability :</label>
+            <input class='form-control' name="availability" type='text' [(ngModel)]="product.availability" >
+        </div>
+        <div class='form-group'>
+                <label> Product Url :</label>
+                <input class='form-control' name="productUrl" type='text' [(ngModel)]="product.productUrl"required>
+        </div>
+        <div class="form-group" *ngIf="radioItems">
+            Price Tier
+                <div class="form-check" *ngFor="let radioItem of radioItems">
+                    <input class="form-check-input" type="radio" name="pricingTier" value="{{radioItem}}" [(ngModel)]="product.pricingTier" required>
+                    <label class="form-check-label" for="radioItem">
+                        {{radioItem}}
+                    </label>
+                </div>
+        </div>
+        <div class="dropdown">
+            Price Range: 
+            <span *ngIf="product.pricingTier ==='budget'">
+                <select [(ngModel)]="product.priceRange" name="priceRange" required>
+                    <option class="dropdown-item" value="{{product.priceRange}}" [selected]="true">{{product.priceRange}}</option>
+                    <option class="dropdown-item" value="4k - 6k">4k - 6k</option>
+                    <option class="dropdown-item" value="6k - 9k">6k - 9k</option>
+                    <option class="dropdown-item" value="9k - 11k">9k - 11k</option>
+                </select>
+            </span>
+            <span *ngIf="product.pricingTier ==='premier'">
+                    <select [(ngModel)]="product.priceRange" name="priceRange" required>
+                        <option class="dropdown-item" value="{{product.priceRange}}" [selected]="true">{{product.priceRange}}</option>
+                        <option class="dropdown-item" value="11k - 20k">11k - 20k</option>
+                        <option class="dropdown-item" value="20k - 30k">20k - 30k</option>
+                        <option class="dropdown-item" value="30k+">30k+</option>
+                    </select>
+            </span>
+        </div>
+
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="isEditable" [(ngModel)]="product.isEditable">
+                <label class="form-check-label" for="isEditable">
+                    Is Editable
+                </label>
+            </div>
+        </div>
+
+        <div>
+                <button type="submit" class="btn btn-primary" [disabled]="!productForm.form.valid"> Update </button>
+        </div>
+    </form>
+</div>
+<div class="row mt-2" *ngIf="message">
+        <div class="alert alert-success">{{message}}</div>
+</div>
