@@ -30,6 +30,7 @@
     
 </body>
 <script>
+    //Creating websocket client connection
     let ws = new WebSocket('ws://localhost:5000');
     ws.open = ()=>{
         console.log('connected to the server');
@@ -44,6 +45,7 @@
             }
         }
     }
+    
     getLineNos.addEventListener('submit', (event)=>{
         event.preventDefault();
         ws.send(lineNos.value);
